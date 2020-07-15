@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kushal niroula</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="assets/site.css">
+</head>
+
+<body>
+    <a href="#" id="sidebar-revealer"> >> </a>
+    <div class="sidebar">
+        <a href="#" id="sidebar-hider">X</a>
+        <div class="profile-container">
+            <img src="images/me.jpg" alt="Rehmat" class="profile-image">
+            <h3 class="profile-title">
+                Kushal Niroula
+            </h3>
+        </div>
+        <div id="link-container">
+            <a href="#index" class="link">
+                Intro
+            </a>
+            <a href="#projects" class="link">
+                Projects
+            </a>
+            <a href="#contact-me" class="link">
+                Contact me
+            </a>
+            <a href="#last-image-container" class="link">
+                #Chill
+            </a>
+        </div>
+    </div>
+    <section class="content">
+        <section id="index">
+            <div class="info-card">
+                <h2 class="title-text">
+                    Hi, I am Kushal Niroula
+                </h2>
+                <div class="intro">
+                    I am a programmer, cricketer and that's it. Those are the only things I am even remotely good at.
+                </div>
+                <div class="links">
+                    Here are some links you can find me at: <br/>
+                    <br/>
+                    <a href="https://github.com/RehmatFalcon">
+                        <img src="images/github.jpg" alt="Github logo" title="Github link">
+                    </a>
+                    <a href="https://www.facebook.com/rehmat.niroula.77/">
+                        <img src="images/fbook.jpg" alt="Facebook logo" title="Facebook link">
+                    </a>
+                    <a href="mailto:niroulakushal31@gmail.com">
+                        <img src="images/gmail.jpg" alt="Gmail logo" title="Gmail link">
+                    </a>
+                    <a href="https://dev.to/rehmatfalcon">
+                        <img src="https://d2fltix0v2e0sb.cloudfront.net/dev-badge.svg" alt="Kushal Niroula's DEV Profile" title="Dev.to profile link">
+                    </a>
+                </div>
+            </div>
+        </section>
+        <section id="projects">
+            <h4 class="title-text">Github projects</h4>
+            <div id="project-list">
+            </div>
+        </section>
+        <section id="contact-me">
+            <h3 class="contact-title">
+                So, you want to contact me? <span>Really?? 🤔 </span>
+            </h3>
+            <div id="contact-content">
+                <div id="contact-box">
+                    <p class="contact-single">
+                        Mobile: <a href="tel:9816988504">9816988504</a>
+                    </p>
+                    <p class="contact-single">
+                        Gmail: <a href="mailto:niroulakushal31@gmail.com">niroulakushal31@gmail.com</a>
+                    </p>
+                    <p class="contact-single">
+                        Fax: I dont have a fax.
+                    </p>
+                    <p class="contact-single">
+                        Facebook: <a href="https://www.facebook.com/rehmat.niroula.77">@kushalNiroula</a>
+                    </p>
+                    Or, use the following form <br/>
+                    <form action="#" onsubmit="return false;">
+                        <input type="text" class="contact-input" placeholder="Your name" required>
+                        <textarea rows="3" class="contact-input" placeholder="Your message" required></textarea>
+                        <button class="contact-message-send" type="button">
+                            Send
+                        </button><br/>
+                        <span id="contact-troll-text" class="hide">
+                            I dont think I wrote the code to handle form submit. Please just email or call me.
+                        </span>
+                    </form>
+                </div>
+                <div id="contact-interests">
+                    So, here are the topics that you can talk with me about. I still don't know why you would want to, but still, here goes
+                    <ul>
+                        <li>Iron man</li>
+                        <li>Captain America</li>
+                        <li>Marvel Cinematic Universe</li>
+                        <li>M.S Dhoni</li>
+                        <li>The Office (Series)</li>
+                        <li>Friends and How I met your mother</li>
+                        <li>
+                            C#, PHP, JS, CSS
+                        </li>
+                        <li>How Doctor Strange may not have known that Endgame was the succesful timeline</li>
+                        <li>
+                            And why I desperately need to excercise starting tomorrow
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="last-video-section">
+                <h3 id="last-video-text">
+                    Here is a video of the great <kbd>Shia LeBouf</kbd> asking you to just do it.
+                </h3>
+                <iframe id="last-video-yt" width="560" height="315" src="https://www.youtube.com/embed/5-sfG8BV8wU" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div id="last-image-container">
+                <h4 class="last-image-text">
+                    And this is me just chilling along the river I dont remember at Mustang
+                </h4>
+                <a href="images/me_incognito.jpg" target="_blank" rel="noreferrer noopener">
+                    <img src="images/me_incognito.jpg" alt="Kushal incognito" class="last-image-me">
+                </a>
+            </div>
+        </section>
+    </section>
+
+    <template id="project-template">
+        <div class="project">
+            <a href="#" class="project-name" target="_blank" rel="noreferrer noopener">
+                Bash Helper [Language]
+            </a>
+            <p class="project-description">
+                Some description about the project that I saved
+            </p>
+            <span class="project-stars"></span>
+        </div>
+    </template>
+</body>
+<script>
+    const project_template_elm = document.querySelector('#project-template');
+    const project_list_elm = document.querySelector("#project-list");
+    fetch('https://api.github.com/users/RehmatFalcon/repos')
+        .then(res => res.json())
+        .then(res => {
+            const doc_frag = document.createDocumentFragment();
+            for (const repo of res) {
+                const elm = project_template_elm.content.cloneNode(true);
+                const project_name_link = elm.querySelector('.project-name');
+                project_name_link.href = repo.html_url;
+                project_name_link.textContent = `${repo.name} [${repo.language? repo.language: "Outriders"}]`;
+                elm.querySelector('.project-description').textContent = repo.description;
+                elm.querySelector('.project-stars').textContent = `${repo.stargazers_count} stars`;
+                doc_frag.append(elm);
+            }
+            project_list_elm.appendChild(doc_frag);
+        });
+
+    const contact_message_send_btn_elm = document.querySelector(".contact-message-send");
+    const contact_troll_text_elm = document.querySelector("#contact-troll-text");
+    const disappointing_texts = [
+        "Really??",
+        "Seriously??",
+        "Did you even read the message?",
+        "Come on!!!"
+    ];
+    let send_try_after_message = 1;
+    const max_try = 6;
+    contact_message_send_btn_elm.addEventListener('click', () => {
+        if (contact_troll_text_elm.classList.contains("hide")) {
+            if (contact_message_send_btn_elm.form.reportValidity()) {
+                contact_troll_text_elm.classList.remove('hide');
+            }
+        } else {
+            const rand_index = get_random(1, 4);
+            if (send_try_after_message == max_try - 1) {
+                contact_troll_text_elm.textContent = contact_troll_text_elm.textContent + " " + "Allright, that's it. You click that send one more time, and I am OUT!!!";
+                send_try_after_message++;
+            } else if (send_try_after_message >= max_try) {
+                document.write("Ok. I am out. Happy now?? Have a good day, you maniac. May Zuckerberg watch over you.");
+            } else {
+                contact_troll_text_elm.textContent = contact_troll_text_elm.textContent + " " + disappointing_texts[rand_index - 1];
+                send_try_after_message++;
+            }
+        }
+    });
+
+
+    const last_video_yt_elm = document.querySelector("#last-video-yt");
+
+    const videos = [
+        "https://www.youtube.com/embed/5-sfG8BV8wU",
+        "https://www.youtube.com/embed/ZXsQAXx_ao0",
+        "https://www.youtube.com/embed/VAVLOHbqWd4"
+    ];
+
+    const video_index_to_show = get_random(1, videos.length);
+
+    last_video_yt_elm.src = videos[video_index_to_show - 1];
+
+    const side_bar_revealer = document.querySelector("#sidebar-revealer");
+
+    const sidebar_elm = document.querySelector(".sidebar");
+
+    const sidebar_hider = document.querySelector("#sidebar-hider");
+
+    side_bar_revealer.addEventListener('click', e => {
+        e.preventDefault();
+        sidebar_elm.classList.add('revealed');
+    });
+
+    sidebar_hider.addEventListener('click', e => {
+        e.preventDefault();
+        sidebar_elm.classList.remove('revealed');
+    });
+
+    function get_random(min, max) {
+        const rand = Math.floor(Math.random() * 10);
+        if (rand <= max && rand >= min) return rand;
+        return get_random(min, max);
+    }
+</script>
+
+</html>
