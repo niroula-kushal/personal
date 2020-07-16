@@ -187,7 +187,7 @@
                 contact_troll_text_elm.textContent = contact_troll_text_elm.textContent + " " + "Allright, that's it. You click that send one more time, and I am OUT!!!";
                 send_try_after_message++;
             } else if (send_try_after_message >= max_try) {
-                document.write("Ok. I am out. Happy now?? Have a good day, you maniac. There is a special place in hell for people like you. May Zuckerberg watch over you.");
+                start_shutdown_process();
             } else {
                 contact_troll_text_elm.textContent = contact_troll_text_elm.textContent + " " + disappointing_texts[rand_index - 1];
                 send_try_after_message++;
@@ -229,6 +229,61 @@
         if (rand <= max && rand >= min) return rand;
         return get_random(min, max);
     }
+
+    function start_shutdown_process() {
+        const elm = document.querySelector('#shutdown-message-template').content.cloneNode(true);
+        document.body.innerHTML = "";
+        document.body.appendChild(elm);
+        let interval = setInterval(() => {
+            if (document.title.includes("!")) {
+                document.title = document.title.substr(0, document.title.length - 1);
+            } else {
+                document.title = document.title + "!";
+            }
+        }, 1000);
+        setTimeout(() => {
+            eventually_show_love();
+            clearInterval(interval);
+            if (document.title.includes("!")) {
+                document.title = document.title.substr(0, document.title.length - 1);
+            }
+        }, 10 * 1000);
+    }
+
+    function eventually_show_love() {
+        document.body.innerHTML = `
+        <div id="eventual-love" style="text-align: center;">
+        <h3>
+            You stayed 10 seconds?? Aww, you guys... I cant stay mad at you.
+        </h3>
+        <h4>
+            Here is a video of Ted And Barney singing "For the longest time"
+        </h4>
+        <iframe 
+        style="max-width: 80%; border-radius: 20px;"
+        width="560" height="315" src="https://www.youtube.com/embed/EQJDgl3sLfQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen autoplay="true"></iframe>
+    </div>
+        
+        `;
+    }
 </script>
+
+<template id="shutdown-message-template">
+    <div id="shutdown-screen">
+        <h3>
+            Ok, I am out. Happy now??
+        </h3>
+        <h4>Have a good day, you maniac. There is a special place in hell for people like you.</h4>
+        <h5>May Zuckerberg watch over you</h5>
+        <div>
+            <h3>Barney Stinson judges you</h3>
+            <img src="images/barney-judges.jpeg" alt="Barney judging you">
+        </div>
+    </div>
+</template>
+
+<template id="eventual-love-template">
+
+</template>
 
 </html>

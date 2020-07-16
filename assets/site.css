@@ -335,6 +335,11 @@ section.content {
     display: none;
 }
 
+#shutdown-screen {
+    text-align: center;
+    font-size: 1.5em;
+}
+
 @media(max-width: 1200px) {
     .profile-image,
     .profile-title {
